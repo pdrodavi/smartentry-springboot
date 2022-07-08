@@ -2,6 +2,7 @@ package com.smartentry.backend.domain;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,13 +11,25 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Entity
+@Table(name = "correspondencia")
 public class Correspondence implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String tipo_correspondencia;
 
-    private String data_recebimento;
+    private Date data_recebimento;
 
     private String status_entrega;
+
+    @ManyToOne
+    @JoinColumn(name = "id_morador")
+    private Dweller dweller;
+
+    @ManyToOne
+    @JoinColumn(name = "id_func_portaria")
+    private ConciergeEmployee conciergeEmployee;
 }
