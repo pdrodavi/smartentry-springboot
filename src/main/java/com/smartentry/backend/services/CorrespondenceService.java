@@ -23,6 +23,13 @@ public class CorrespondenceService {
         return page;
     }
 
+    @Transactional(readOnly = true)
+    public CorrespondenceDTO findById(Integer id) {
+        Correspondence result = repository.findById(id).get();
+        CorrespondenceDTO dto = new CorrespondenceDTO(result);
+        return dto;
+    }
+
 //    public List<Correspondence> findAll() {
 //        return repository.findAll();
 //    }

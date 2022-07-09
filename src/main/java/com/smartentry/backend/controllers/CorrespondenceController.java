@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/correspondences")
@@ -23,6 +22,11 @@ public class CorrespondenceController {
     @GetMapping
     public Page<CorrespondenceDTO> findAll(Pageable pageable) {
         return service.findAll(pageable);
+    }
+
+    @GetMapping(value = "/{id}")
+    public CorrespondenceDTO findById(@PathVariable Integer id) {
+        return service.findById(id);
     }
 
 //    @GetMapping
