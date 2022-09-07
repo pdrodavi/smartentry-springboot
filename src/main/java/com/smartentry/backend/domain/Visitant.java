@@ -29,4 +29,8 @@ public class Visitant implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_morador")
     private Dweller dweller;
+
+    @OneToOne
+    @JoinColumn(name = "id_vcarro")
+    private VCar vCar;
 }
