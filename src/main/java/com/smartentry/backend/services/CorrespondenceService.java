@@ -1,13 +1,18 @@
 package com.smartentry.backend.services;
 
+import com.smartentry.backend.domain.ConciergeEmployee;
 import com.smartentry.backend.domain.Correspondence;
+import com.smartentry.backend.domain.Dweller;
 import com.smartentry.backend.domain.dto.CorrespondenceDTO;
+import com.smartentry.backend.repositories.ConciergeEmployeeRepository;
 import com.smartentry.backend.repositories.CorrespondenceRepository;
+import com.smartentry.backend.repositories.DwellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -16,11 +21,16 @@ public class CorrespondenceService {
     @Autowired
     private CorrespondenceRepository repository;
 
+    @Autowired
+    private DwellerService dwellerService;
+
+    @Autowired
+    private ConciergeEmployeeService employeeService;
+
+
     @Transactional(readOnly = true)
-    public Page<CorrespondenceDTO> findAll(Pageable pageable) {
-        Page<Correspondence> result = repository.findAll(pageable);
-        Page<CorrespondenceDTO> page = result.map(x -> new CorrespondenceDTO(x));
-        return page;
+    public List<Correspondence> findAll() {
+        return repository.findAll();
     }
 
     @Transactional(readOnly = true)
@@ -34,9 +44,26 @@ public class CorrespondenceService {
 //        return repository.findAll();
 //    }
 
-    public Correspondence insert(Correspondence obj) {
-        obj.setId(null);
-        return repository.save(obj);
+    public Correspondence insert(CorrespondenceDTO obj) {
+        return fromDto(obj);
+    }
+
+    private Correspondence fromDto(CorrespondenceDTO obj) {
+        Correspondence newObj = new Correspondence();
+        newObj.setId(obj.getId());
+        newObj.setTipo_correspondencia(obj.getTipo_correspondencia());
+        newObj.setData_recebimento(obj.getData_recebimento());
+        newObj.setStatus_entrega(obj.getStatus_entrega());
+
+        Dweller dweller = dwellerService.findById(obj.getDweller());
+
+        ConciergeEmployee conciergeEmployee = employeeService.findById(obj.getConciergeEmployee());
+
+        newObj.setDweller(dweller);
+        newObj.setConciergeEmployee(conciergeEmployee);
+
+        return repository.save(newObj);
+
     }
 
     public Correspondence update(Correspondence obj) {

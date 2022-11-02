@@ -11,17 +11,22 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/correspondences")
+@RequestMapping(value = "/api/correspondences")
 public class CorrespondenceController {
 
     @Autowired
     private CorrespondenceService service;
 
     @GetMapping
-    public Page<CorrespondenceDTO> findAll(Pageable pageable) {
-        return service.findAll(pageable);
+    public ResponseEntity<List<CorrespondenceDTO>> findAll() {
+        List<CorrespondenceDTO> listDto = service.findAll().stream().map(obj -> new CorrespondenceDTO(obj)).collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(listDto);
     }
 
     @GetMapping(value = "/{id}")
@@ -35,8 +40,8 @@ public class CorrespondenceController {
 //    }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody Correspondence obj) {
-        obj = service.insert(obj);
+    public ResponseEntity<CorrespondenceDTO> insert(@RequestBody CorrespondenceDTO obj) {
+        obj = new CorrespondenceDTO(service.insert(obj));
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
