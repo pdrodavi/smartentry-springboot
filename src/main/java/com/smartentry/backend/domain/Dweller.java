@@ -22,7 +22,7 @@ public class Dweller implements Serializable {
 
     private Integer cpf;
 
-    private String rg;
+    private Integer rg;
 
     private Integer status;
 
