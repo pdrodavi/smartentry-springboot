@@ -7,6 +7,7 @@ import com.smartentry.backend.domain.dto.CorrespondenceDTO;
 import com.smartentry.backend.repositories.ConciergeEmployeeRepository;
 import com.smartentry.backend.repositories.CorrespondenceRepository;
 import com.smartentry.backend.repositories.DwellerRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,10 +35,9 @@ public class CorrespondenceService {
     }
 
     @Transactional(readOnly = true)
-    public CorrespondenceDTO findById(Integer id) {
-        Correspondence result = repository.findById(id).get();
-        CorrespondenceDTO dto = new CorrespondenceDTO(result);
-        return dto;
+    public Correspondence findById(Integer id) {
+        Optional<Correspondence> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(id, "Objeto nao encontrado! " + Correspondence.class.getName()));
     }
 
 //    public List<Correspondence> findAll() {
@@ -66,8 +66,10 @@ public class CorrespondenceService {
 
     }
 
-    public Correspondence update(Correspondence obj) {
-        return repository.save(obj);
+    public Correspondence update(CorrespondenceDTO obj) {
+        findById(obj.getId());
+        return fromDto(obj);
+
     }
 
     public void delete(Integer id) {

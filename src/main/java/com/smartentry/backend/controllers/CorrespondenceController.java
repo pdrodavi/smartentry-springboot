@@ -30,8 +30,9 @@ public class CorrespondenceController {
     }
 
     @GetMapping(value = "/{id}")
-    public CorrespondenceDTO findById(@PathVariable Integer id) {
-        return service.findById(id);
+    public ResponseEntity<CorrespondenceDTO> findById(@PathVariable Integer id) {
+        CorrespondenceDTO obj = new CorrespondenceDTO(service.findById(id));
+        return ResponseEntity.ok().body(obj);
     }
 
 //    @GetMapping
@@ -47,11 +48,10 @@ public class CorrespondenceController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody Correspondence obj, @PathVariable Integer id) {
-        obj.setId(id);
-        obj = service.update(obj);
-        return ResponseEntity.noContent().build();
+    @PutMapping
+    public ResponseEntity<CorrespondenceDTO> update(@RequestBody CorrespondenceDTO obj) {
+        obj = new CorrespondenceDTO(service.update(obj));
+        return ResponseEntity.ok().body(obj);
     }
 
     @DeleteMapping(value = "/{id}")
