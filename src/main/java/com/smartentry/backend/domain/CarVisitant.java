@@ -10,14 +10,18 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "ecarro")
-public class CarCompany {
+@Table(name = "carro_visitante")
+public class CarVisitant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String placa;
+    @ManyToOne
+    @JoinColumn(name = "id_visitante")
+    private Visitant visitant;
 
-    private Integer status;
+    @OneToOne
+    @JoinColumn(name = "id_vcarro")
+    private VCar vCar;
 }

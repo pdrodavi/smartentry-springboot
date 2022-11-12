@@ -1,11 +1,15 @@
 package com.smartentry.backend.services;
 
 import com.smartentry.backend.domain.CarCompany;
+import com.smartentry.backend.domain.CarVisitant;
 import com.smartentry.backend.repositories.CarCompanyRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarCompanyService {
@@ -20,6 +24,12 @@ public class CarCompanyService {
     public CarCompany insert(CarCompany obj) {
         obj.setId(null);
         return repository.save(obj);
+    }
+
+    @Transactional(readOnly = true)
+    public CarCompany findById(Integer id) {
+        Optional<CarCompany> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(id, "Objeto nao encontrado! " + CarCompany.class.getName()));
     }
 //
 //    public Visitant update(Visitant obj) {

@@ -22,9 +22,12 @@ public class VisitorCompanyDTO {
 
     private String funcionario;
 
+    private Integer carCompany;
+
     public VisitorCompanyDTO(VisitorCompany visitorCompany) {
         id = visitorCompany.getId();
         nome_empresa = visitorCompany.getNome_empresa();
         funcionario = visitorCompany.getFuncionario();
+        carCompany = visitorCompany.getCarCompany().getId();
     }
 }

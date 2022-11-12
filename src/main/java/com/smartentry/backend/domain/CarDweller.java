@@ -11,20 +11,16 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "visitante")
-public class Visitant implements Serializable {
+@Table(name = "carro_morador")
+public class CarDweller implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome;
-
-    private Integer cpf;
-
-    private Integer tipo;
-
-    private Integer status;
+    @ManyToOne
+    @JoinColumn(name = "id_carro")
+    private Car car;
 
     @ManyToOne
     @JoinColumn(name = "id_morador")

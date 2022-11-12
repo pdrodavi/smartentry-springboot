@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -11,22 +13,18 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "visitante")
-public class Visitant implements Serializable {
+@Table(name = "log_entrada")
+public class LogEntry implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome;
+    @OneToOne
+    @JoinColumn(name = "id_validacao_portao")
+    private GateValidation gateValidation;
 
-    private Integer cpf;
+    private Date data;
 
-    private Integer tipo;
-
-    private Integer status;
-
-    @ManyToOne
-    @JoinColumn(name = "id_morador")
-    private Dweller dweller;
+    private Time hora;
 }

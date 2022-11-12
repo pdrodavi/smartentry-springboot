@@ -1,11 +1,15 @@
 package com.smartentry.backend.services;
 
+import com.smartentry.backend.domain.CarVisitant;
 import com.smartentry.backend.domain.Visitant;
 import com.smartentry.backend.repositories.VisitantRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VisitantService {
@@ -13,16 +17,22 @@ public class VisitantService {
     @Autowired
     private VisitantRepository repository;
 
-    public List<Visitant> findAll() {
+    public List<CarVisitant> findAll() {
         return repository.findAll();
     }
 
-    public Visitant insert(Visitant obj) {
+    @Transactional(readOnly = true)
+    public CarVisitant findById(Integer id) {
+        Optional<CarVisitant> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(id, "Objeto nao encontrado! " + CarVisitant.class.getName()));
+    }
+
+    public CarVisitant insert(CarVisitant obj) {
         obj.setId(null);
         return repository.save(obj);
     }
 
-    public Visitant update(Visitant obj) {
+    public CarVisitant update(CarVisitant obj) {
         return repository.save(obj);
     }
 
