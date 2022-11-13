@@ -2,6 +2,9 @@ package com.smartentry.backend.services;
 
 import com.smartentry.backend.domain.CarCompany;
 import com.smartentry.backend.domain.CarVisitant;
+import com.smartentry.backend.domain.VisitorCompany;
+import com.smartentry.backend.domain.dto.CarCompanyDTO;
+import com.smartentry.backend.domain.dto.VisitorCompanyDTO;
 import com.smartentry.backend.repositories.CarCompanyRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +24,18 @@ public class CarCompanyService {
         return repository.findAll();
     }
 
-    public CarCompany insert(CarCompany obj) {
-        obj.setId(null);
-        return repository.save(obj);
+    public CarCompany insert(CarCompanyDTO obj) {
+        return fromDto(obj);
+    }
+
+    private CarCompany fromDto(CarCompanyDTO obj) {
+        CarCompany newObj = new CarCompany();
+        newObj.setId(obj.getId());
+        newObj.setPlaca(obj.getPlaca());
+        newObj.setStatus(obj.getStatus());
+
+        return repository.save(newObj);
+
     }
 
     @Transactional(readOnly = true)
