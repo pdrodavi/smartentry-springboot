@@ -1,7 +1,5 @@
 package com.smartentry.backend.domain.dto;
 
-import com.smartentry.backend.domain.CarVisitant;
-import com.smartentry.backend.domain.VCar;
 import com.smartentry.backend.domain.Visitant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,14 +14,25 @@ public class VisitantDTO {
 
     private Integer id;
 
-    private Integer visitant;
+    private String nome;
+
+    private Integer cpf;
+
+    private Integer tipo;
+
+    private Integer status;
 
     private Integer dweller;
 
     private Integer vCar;
 
-    public VisitantDTO(CarVisitant carVisitant) {
-        id = carVisitant.getId();
-        visitant = carVisitant.getVisitant().getId();
+    public VisitantDTO(Visitant visitant) {
+        id = visitant.getId();
+        nome = visitant.getNome();
+        cpf = visitant.getCpf();
+        tipo = visitant.getTipo();
+        status = visitant.getStatus();
+        dweller = visitant.getDweller().getId();
+        vCar = visitant.getCarVisitant().getId();
     }
 }

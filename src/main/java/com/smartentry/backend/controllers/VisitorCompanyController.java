@@ -42,6 +42,12 @@ public class VisitorCompanyController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping
+    public ResponseEntity<VisitorCompanyDTO> update(@RequestBody VisitorCompanyDTO obj) {
+        obj = new VisitorCompanyDTO(service.update(obj));
+        return ResponseEntity.ok().body(obj);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);

@@ -1,5 +1,6 @@
 package com.smartentry.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,12 +21,19 @@ public class GateValidation implements Serializable  {
 
     @OneToOne
     @JoinColumn(name = "id_carro_visitante")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private CarVisitant carVisitant;
 
+    @OneToOne
+    @JoinColumn(name = "id_carro_morador")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Car carDweller;
 
     @OneToOne
     @JoinColumn(name = "id_carro_empresa")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private CarCompany carCompany;
+
 
     private String liberacao;
 }

@@ -49,6 +49,12 @@ public class VisitorCompanyService {
 
     }
 
+    public VisitorCompany update(VisitorCompanyDTO obj) {
+        findById(obj.getId());
+        return fromDto(obj);
+
+    }
+
     public void delete(Integer id) {
         repository.deleteById(id);
     }

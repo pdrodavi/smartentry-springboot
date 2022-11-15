@@ -1,7 +1,7 @@
 package com.smartentry.backend.services;
 
-import com.smartentry.backend.domain.CarVisitant;
-import com.smartentry.backend.domain.Visitant;
+import com.smartentry.backend.domain.*;
+import com.smartentry.backend.domain.dto.VisitantDTO;
 import com.smartentry.backend.repositories.VisitantRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +17,46 @@ public class VisitantService {
     @Autowired
     private VisitantRepository repository;
 
-    public List<CarVisitant> findAll() {
+    @Autowired
+    private DwellerService dwellerService;
+
+    @Autowired
+    private CarVisitantService carVisitantService;
+
+    public List<Visitant> findAll() {
         return repository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public CarVisitant findById(Integer id) {
-        Optional<CarVisitant> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException(id, "Objeto nao encontrado! " + CarVisitant.class.getName()));
+    public Visitant findById(Integer id) {
+        Optional<Visitant> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(id, "Objeto nao encontrado! " + Visitant.class.getName()));
     }
 
-    public CarVisitant insert(CarVisitant obj) {
-        obj.setId(null);
-        return repository.save(obj);
+    public Visitant insert(VisitantDTO obj) {
+        return fromDto(obj);
     }
 
-    public CarVisitant update(CarVisitant obj) {
+    private Visitant fromDto(VisitantDTO obj) {
+        Visitant newObj = new Visitant();
+        newObj.setId(obj.getId());
+        newObj.setNome(obj.getNome());
+        newObj.setStatus(obj.getStatus());
+        newObj.setCpf(obj.getCpf());
+        newObj.setTipo(obj.getTipo());
+
+        Dweller dweller = dwellerService.findById(obj.getDweller());
+
+        CarVisitant carVisitant = carVisitantService.findById(obj.getVCar());
+
+        newObj.setDweller(dweller);
+        newObj.setCarVisitant(carVisitant);
+
+        return repository.save(newObj);
+
+    }
+
+    public Visitant update(Visitant obj) {
         return repository.save(obj);
     }
 

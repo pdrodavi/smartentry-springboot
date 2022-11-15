@@ -3,6 +3,7 @@ package com.smartentry.backend.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -10,18 +11,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "carro_visitante")
-public class CarVisitant {
+@Table(name = "vcarro")
+public class CarVisitant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_visitante")
-    private Visitant visitant;
+    private String placa;
 
-    @OneToOne
-    @JoinColumn(name = "id_vcarro")
-    private VCar vCar;
+    private Integer status;
 }
