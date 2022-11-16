@@ -26,6 +26,9 @@ public class DwellerService {
     @Autowired
     private ContactDwellerService contactDwellerService;
 
+    @Autowired
+    private CarService carService;
+
     @Transactional(readOnly = true)
     public List<Dweller> findAll() {
         return repository.findAll();
@@ -53,8 +56,11 @@ public class DwellerService {
 
         ContactDweller contactDweller = contactDwellerService.findById(obj.getContactDweller());
 
+        Car car = carService.findById(obj.getCar());
+
         newObj.setResidence(residence);
         newObj.setContactDweller(contactDweller);
+        newObj.setCar(car);
 
         return repository.save(newObj);
 

@@ -22,7 +22,7 @@ public class VisitorCompany implements Serializable {
 
     private String funcionario;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_ecarro")
     private CarCompany carCompany;
 

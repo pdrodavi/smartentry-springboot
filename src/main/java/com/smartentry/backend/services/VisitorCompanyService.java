@@ -5,11 +5,13 @@ import com.smartentry.backend.domain.dto.CorrespondenceDTO;
 import com.smartentry.backend.domain.dto.VisitorCompanyDTO;
 import com.smartentry.backend.repositories.CarCompanyRepository;
 import com.smartentry.backend.repositories.VisitorCompanyRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VisitorCompanyService {
@@ -25,10 +27,10 @@ public class VisitorCompanyService {
     }
 
     @Transactional(readOnly = true)
-    public VisitorCompanyDTO findById(Integer id) {
+    public VisitorCompany findById(Integer id) {
         VisitorCompany result = repository.findById(id).get();
-        VisitorCompanyDTO dto = new VisitorCompanyDTO(result);
-        return dto;
+        Optional<VisitorCompany> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(id, "Objeto nao encontrado! " + VisitorCompany.class.getName()));
     }
 
     public VisitorCompany insert(VisitorCompanyDTO obj) {
@@ -49,9 +51,17 @@ public class VisitorCompanyService {
 
     }
 
-    public VisitorCompany update(VisitorCompanyDTO obj) {
-        findById(obj.getId());
-        return fromDto(obj);
+    public VisitorCompany update(Integer id, VisitorCompanyDTO obj) {
+        VisitorCompany newObj = findById(id);
+        newObj.setId(obj.getId());
+        newObj.setFuncionario(obj.getFuncionario());
+        newObj.setNome_empresa(obj.getNome_empresa());
+
+        CarCompany carCompany = service.findById(obj.getCarCompany());
+
+        newObj.setCarCompany(carCompany);
+
+        return repository.save(newObj);
 
     }
 

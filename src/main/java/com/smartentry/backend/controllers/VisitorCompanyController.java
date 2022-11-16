@@ -1,6 +1,7 @@
 package com.smartentry.backend.controllers;
 
 import com.smartentry.backend.domain.CarCompany;
+import com.smartentry.backend.domain.Correspondence;
 import com.smartentry.backend.domain.VisitorCompany;
 import com.smartentry.backend.domain.dto.CorrespondenceDTO;
 import com.smartentry.backend.domain.dto.VisitorCompanyDTO;
@@ -30,8 +31,9 @@ public class VisitorCompanyController {
     }
 
     @GetMapping(value = "/{id}")
-    public VisitorCompanyDTO findById(@PathVariable Integer id) {
-        return service.findById(id);
+    public ResponseEntity<VisitorCompanyDTO> findById(@PathVariable Integer id) {
+        VisitorCompanyDTO obj = new VisitorCompanyDTO(service.findById(id));
+        return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
@@ -42,10 +44,10 @@ public class VisitorCompanyController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping
-    public ResponseEntity<VisitorCompanyDTO> update(@RequestBody VisitorCompanyDTO obj) {
-        obj = new VisitorCompanyDTO(service.update(obj));
-        return ResponseEntity.ok().body(obj);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<VisitorCompanyDTO> update(@PathVariable Integer id, @RequestBody VisitorCompanyDTO obj) {
+        VisitorCompany newObj = service.update(id, obj);
+        return ResponseEntity.ok().body(new VisitorCompanyDTO(newObj));
     }
 
     @DeleteMapping(value = "/{id}")

@@ -20,19 +20,21 @@ public class Dweller implements Serializable {
 
     private String nome;
 
-    private Integer cpf;
+    private String cpf;
 
-    private Integer rg;
+    private String rg;
 
     private Integer status;
-
 
     @OneToOne
     @JoinColumn(name = "id_apto")
     private Residence residence;
 
-
     @OneToOne
     @JoinColumn(name = "id_contato_morador")
     private ContactDweller contactDweller;
+
+    @ManyToOne
+    @JoinColumn(name = "id_carro")
+    private Car car;
 }

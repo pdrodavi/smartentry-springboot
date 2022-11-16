@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -20,13 +21,13 @@ public class ConciergeEmployee implements Serializable {
 
     private String nome;
 
-    private Integer cpf;
+    private String cpf;
 
     private Integer status;
 
     private String data_admissao;
 
-    private String data_demissao;
+    private Date data_demissao;
 
     private String turno;
 }

@@ -17,15 +17,17 @@ public class DwellerDTO {
 
     private String nome;
 
-    private Integer cpf;
+    private String cpf;
 
-    private Integer rg;
+    private String rg;
 
     private Integer status;
 
     private Integer residence;
 
     private Integer contactDweller;
+
+    private Integer car;
 
     public DwellerDTO(Dweller dweller) {
         id = dweller.getId();
@@ -35,5 +37,6 @@ public class DwellerDTO {
         status = dweller.getStatus();
         residence = dweller.getResidence().getId();
         contactDweller = dweller.getContactDweller().getId();
+        car = dweller.getCar().getId();
     }
 }
