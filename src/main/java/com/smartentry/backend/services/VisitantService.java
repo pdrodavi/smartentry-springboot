@@ -56,8 +56,21 @@ public class VisitantService {
 
     }
 
-    public Visitant update(Visitant obj) {
-        return repository.save(obj);
+    public Visitant update(Integer id, VisitantDTO obj) {
+        Visitant newObj = findById(id);
+        newObj.setNome(obj.getNome());
+        newObj.setStatus(obj.getStatus());
+        newObj.setCpf(obj.getCpf());
+        newObj.setTipo(obj.getTipo());
+
+        Dweller dweller = dwellerService.findById(obj.getDweller());
+
+        CarVisitant carVisitant = carVisitantService.findById(obj.getVCar());
+
+        newObj.setDweller(dweller);
+        newObj.setCarVisitant(carVisitant);
+
+        return repository.save(newObj);
     }
 
     public void delete(Integer id) {

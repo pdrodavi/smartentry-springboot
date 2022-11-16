@@ -1,5 +1,8 @@
 package com.smartentry.backend.controllers;
 
+import com.smartentry.backend.domain.Correspondence;
+import com.smartentry.backend.domain.Visitant;
+import com.smartentry.backend.domain.dto.CorrespondenceDTO;
 import com.smartentry.backend.domain.dto.VisitantDTO;
 import com.smartentry.backend.services.VisitantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +42,11 @@ public class VisitantController {
         return ResponseEntity.created(uri).build();
     }
 
-//    @PutMapping(value = "/{id}")
-//    public ResponseEntity<Void> update(@RequestBody CarVisitant obj, @PathVariable Integer id) {
-//        obj.setId(id);
-//        obj = service.update(obj);
-//        return ResponseEntity.noContent().build();
-//    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<VisitantDTO> update(@PathVariable Integer id, @RequestBody VisitantDTO obj) {
+        Visitant newObj = service.update(id, obj);
+        return ResponseEntity.ok().body(new VisitantDTO(newObj));
+    }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
