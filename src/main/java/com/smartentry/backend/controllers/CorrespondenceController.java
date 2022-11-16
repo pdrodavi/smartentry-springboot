@@ -48,10 +48,10 @@ public class CorrespondenceController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping
-    public ResponseEntity<CorrespondenceDTO> update(@RequestBody CorrespondenceDTO obj) {
-        obj = new CorrespondenceDTO(service.update(obj));
-        return ResponseEntity.ok().body(obj);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CorrespondenceDTO> update(@PathVariable Integer id, @RequestBody CorrespondenceDTO obj) {
+        Correspondence newObj = service.update(id, obj);
+        return ResponseEntity.ok().body(new CorrespondenceDTO(newObj));
     }
 
     @DeleteMapping(value = "/{id}")

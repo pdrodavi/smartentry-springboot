@@ -1,10 +1,15 @@
 package com.smartentry.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -12,28 +17,22 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "validacao_portao")
+@Table(name = "vw_log")
 public class GateValidation implements Serializable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "id_carro_visitante")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private CarVisitant carVisitant;
+    private String placa_morador;
 
-    @OneToOne
-    @JoinColumn(name = "id_carro_morador")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Car carDweller;
+    private String placa_visitante;
 
-    @OneToOne
-    @JoinColumn(name = "id_carro_empresa")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private CarCompany carCompany;
+    private String placa_empresa;
 
+    private Date data;
+
+    private Time hora;
 
     private String liberacao;
 }

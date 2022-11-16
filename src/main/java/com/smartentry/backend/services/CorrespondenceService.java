@@ -66,9 +66,20 @@ public class CorrespondenceService {
 
     }
 
-    public Correspondence update(CorrespondenceDTO obj) {
-        findById(obj.getId());
-        return fromDto(obj);
+    public Correspondence update(Integer id, CorrespondenceDTO obj) {
+        Correspondence newObj = findById(id);
+        newObj.setTipo_correspondencia(obj.getTipo_correspondencia());
+        newObj.setData_recebimento(obj.getData_recebimento());
+        newObj.setStatus_entrega(obj.getStatus_entrega());
+
+        Dweller dweller = dwellerService.findById(obj.getDweller());
+
+        ConciergeEmployee conciergeEmployee = employeeService.findById(obj.getConciergeEmployee());
+
+        newObj.setDweller(dweller);
+        newObj.setConciergeEmployee(conciergeEmployee);
+
+        return repository.save(newObj);
 
     }
 
