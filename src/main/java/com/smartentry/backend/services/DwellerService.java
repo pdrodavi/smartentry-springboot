@@ -65,4 +65,8 @@ public class DwellerService {
         return repository.save(newObj);
 
     }
+
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
 }

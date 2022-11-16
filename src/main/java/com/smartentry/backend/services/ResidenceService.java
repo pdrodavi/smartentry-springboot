@@ -33,6 +33,10 @@ public class ResidenceService {
         return result.orElseThrow();
     }
 
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
+
 //    @Transactional(readOnly = true)
 //    public CorrespondenceDTO findById(Integer id) {
 //        Correspondence result = repository.findById(id).get();

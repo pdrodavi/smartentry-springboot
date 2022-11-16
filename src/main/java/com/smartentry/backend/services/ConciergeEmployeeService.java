@@ -50,4 +50,8 @@ public class ConciergeEmployeeService {
         return repository.save(newObj);
 
     }
+
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
 }
