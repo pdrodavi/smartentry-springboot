@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/complaints")
+@CrossOrigin("*")
 public class ComplaintController {
 
     @Autowired
