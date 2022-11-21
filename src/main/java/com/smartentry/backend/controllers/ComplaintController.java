@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/complaints")
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://smartentry-angular.vercel.app")
 public class ComplaintController {
 
     @Autowired
