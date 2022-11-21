@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/visitants")
+@CrossOrigin("*")
 public class VisitantController {
 
     @Autowired

@@ -18,15 +18,12 @@ public class UserDTO {
 
     private String nomeUsuario;
 
-    private String senha;
-
     private Integer status;
 
 
     public UserDTO(User user) {
         id = user.getId();
         nomeUsuario = user.getNomeUsuario();
-        senha = user.getSenha();
         status = user.getStatus();
     }
 

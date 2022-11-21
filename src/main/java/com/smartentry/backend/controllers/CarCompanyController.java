@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/carcompany")
+@CrossOrigin("*")
 public class CarCompanyController {
 
     @Autowired

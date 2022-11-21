@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/dweller")
+@CrossOrigin("*")
 public class DwellerController {
 
     @Autowired

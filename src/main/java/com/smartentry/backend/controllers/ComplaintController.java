@@ -26,30 +26,30 @@ public class ComplaintController {
         return ResponseEntity.ok().body(listDto);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<ComplaintDTO> findById(@PathVariable Integer id) {
-        ComplaintDTO obj = new ComplaintDTO(service.findById(id));
-        return ResponseEntity.ok().body(obj);
-    }
+//    @GetMapping(value = "/{id}")
+//    public ResponseEntity<ComplaintDTO> findById(@PathVariable Integer id) {
+//        ComplaintDTO obj = new ComplaintDTO(service.findById(id));
+//        return ResponseEntity.ok().body(obj);
+//    }
 
 //    @GetMapping
 //    public List<Correspondence> findAll() {
 //        return service.findAll();
 //    }
 
-    @PostMapping
-    public ResponseEntity<ComplaintDTO> insert(@RequestBody ComplaintDTO obj) {
-        obj = new ComplaintDTO(service.insert(obj));
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).build();
-    }
-
-    @PutMapping
-    public ResponseEntity<ComplaintDTO> update(@RequestBody ComplaintDTO obj) {
-        obj = new ComplaintDTO(service.update(obj));
-        return ResponseEntity.ok().body(obj);
-    }
+//    @PostMapping
+//    public ResponseEntity<ComplaintDTO> insert(@RequestBody ComplaintDTO obj) {
+//        obj = new ComplaintDTO(service.insert(obj));
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+//        return ResponseEntity.created(uri).build();
+//    }
+//
+//    @PutMapping
+//    public ResponseEntity<ComplaintDTO> update(@RequestBody ComplaintDTO obj) {
+//        obj = new ComplaintDTO(service.update(obj));
+//        return ResponseEntity.ok().body(obj);
+//    }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
