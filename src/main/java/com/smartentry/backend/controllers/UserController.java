@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "https://smartentry-angular.vercel.app")
+@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -23,5 +23,11 @@ public class UserController {
         List<User> list = service.findAll();
         List<UserDTO> listDto = list.stream().map(obj -> new UserDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable Integer id) {
+        UserDTO obj = new UserDTO(service.findById(id));
+        return ResponseEntity.ok().body(obj);
     }
 }

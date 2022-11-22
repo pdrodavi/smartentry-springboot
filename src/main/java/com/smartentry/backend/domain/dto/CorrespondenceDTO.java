@@ -20,7 +20,7 @@ public class CorrespondenceDTO {
     private String tipo_correspondencia;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date data_recebimento;
+    private String data_recebimento;
 
     private String status_entrega;
 

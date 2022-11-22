@@ -20,7 +20,7 @@ public class Visitant implements Serializable {
 
     private String nome;
 
-    private Integer cpf;
+    private String cpf;
 
     private Integer tipo;
 

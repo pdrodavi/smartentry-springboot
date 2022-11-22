@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/dweller")
-@CrossOrigin(origins = "https://smartentry-angular.vercel.app")
+@CrossOrigin("*")
 public class DwellerController {
 
     @Autowired

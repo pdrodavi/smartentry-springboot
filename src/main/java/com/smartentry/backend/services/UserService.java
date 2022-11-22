@@ -3,11 +3,14 @@ package com.smartentry.backend.services;
 import com.smartentry.backend.domain.*;
 import com.smartentry.backend.domain.dto.UserDTO;
 import com.smartentry.backend.repositories.UserRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -27,5 +30,11 @@ public class UserService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public User findById(Integer id) {
+        Optional<User> obj = userRepository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(id, "Objeto nao encontrado! " + Correspondence.class.getName()));
     }
 }

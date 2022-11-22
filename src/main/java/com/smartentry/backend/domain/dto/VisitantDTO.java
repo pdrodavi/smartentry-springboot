@@ -16,7 +16,7 @@ public class VisitantDTO {
 
     private String nome;
 
-    private Integer cpf;
+    private String cpf;
 
     private Integer tipo;
 

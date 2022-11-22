@@ -21,7 +21,7 @@ public class Correspondence implements Serializable {
 
     private String tipo_correspondencia;
 
-    private Date data_recebimento;
+    private String data_recebimento;
 
     private String status_entrega;
 
