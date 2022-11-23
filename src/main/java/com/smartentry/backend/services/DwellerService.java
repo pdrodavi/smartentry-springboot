@@ -66,6 +66,27 @@ public class DwellerService {
 
     }
 
+    public Dweller update(Integer id, DwellerDTO obj) {
+        Dweller newObj = findById(id);
+        newObj.setNome(obj.getNome());
+        newObj.setRg(obj.getRg());
+        newObj.setCpf(obj.getCpf());
+        newObj.setStatus(obj.getStatus());
+
+
+        Residence residence = dwellerService.findById(obj.getResidence());
+
+        ContactDweller contactDweller = contactDwellerService.findById(obj.getContactDweller());
+
+        Car car = carService.findById(obj.getCar());
+
+        newObj.setResidence(residence);
+        newObj.setContactDweller(contactDweller);
+        newObj.setCar(car);
+
+        return repository.save(newObj);
+    }
+
     public void delete(Integer id) {
         repository.deleteById(id);
     }

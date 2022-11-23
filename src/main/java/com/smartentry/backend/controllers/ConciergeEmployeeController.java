@@ -1,5 +1,7 @@
 package com.smartentry.backend.controllers;
 
+import com.smartentry.backend.domain.ConciergeEmployee;
+import com.smartentry.backend.domain.Dweller;
 import com.smartentry.backend.domain.dto.ConciergeEmployeeDTO;
 import com.smartentry.backend.domain.dto.DwellerDTO;
 import com.smartentry.backend.domain.dto.VisitorCompanyDTO;
@@ -41,6 +43,12 @@ public class ConciergeEmployeeController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ConciergeEmployeeDTO> update(@PathVariable Integer id, @RequestBody ConciergeEmployeeDTO obj) {
+        ConciergeEmployee newObj = service.update(id, obj);
+        return ResponseEntity.ok().body(new ConciergeEmployeeDTO(newObj));
     }
 
     @DeleteMapping(value = "/{id}")

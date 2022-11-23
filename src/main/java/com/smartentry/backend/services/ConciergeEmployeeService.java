@@ -51,6 +51,18 @@ public class ConciergeEmployeeService {
 
     }
 
+    public ConciergeEmployee update(Integer id, ConciergeEmployeeDTO obj) {
+        ConciergeEmployee newObj = findById(id);
+        newObj.setNome(obj.getNome());
+        newObj.setCpf(obj.getCpf());
+        newObj.setStatus(obj.getStatus());
+        newObj.setData_admissao(obj.getData_admissao());
+        newObj.setData_demissao(obj.getData_demissao());
+        newObj.setTurno(obj.getTurno());
+
+        return repository.save(newObj);
+    }
+
     public void delete(Integer id) {
         repository.deleteById(id);
     }

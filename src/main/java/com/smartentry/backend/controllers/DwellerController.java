@@ -1,5 +1,7 @@
 package com.smartentry.backend.controllers;
 
+import com.smartentry.backend.domain.Correspondence;
+import com.smartentry.backend.domain.Dweller;
 import com.smartentry.backend.domain.dto.CorrespondenceDTO;
 import com.smartentry.backend.domain.dto.DwellerDTO;
 import com.smartentry.backend.services.DwellerService;
@@ -39,6 +41,12 @@ public class DwellerController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<DwellerDTO> update(@PathVariable Integer id, @RequestBody DwellerDTO obj) {
+        Dweller newObj = service.update(id, obj);
+        return ResponseEntity.ok().body(new DwellerDTO(newObj));
     }
 
     @DeleteMapping(value = "/{id}")
