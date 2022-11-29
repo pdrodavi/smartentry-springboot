@@ -52,7 +52,7 @@ public class DwellerService {
         newObj.setRg(obj.getRg());
         newObj.setStatus(obj.getStatus());
 
-        Residence residence = dwellerService.findById(obj.getResidence());
+        Residence residence = dwellerService.findById(obj.getResidencia());
 
         ContactDweller contactDweller = contactDwellerService.findById(obj.getContactDweller());
 
@@ -74,7 +74,7 @@ public class DwellerService {
         newObj.setStatus(obj.getStatus());
 
 
-        Residence residence = dwellerService.findById(obj.getResidence());
+        Residence residence = dwellerService.findById(obj.getResidencia());
 
         ContactDweller contactDweller = contactDwellerService.findById(obj.getContactDweller());
 

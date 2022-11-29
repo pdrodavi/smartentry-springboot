@@ -23,7 +23,7 @@ public class DwellerDTO {
 
     private Integer status;
 
-    private Integer residence;
+    private Integer residencia;
 
     private Integer contactDweller;
 
@@ -35,7 +35,7 @@ public class DwellerDTO {
         cpf = (dweller.getCpf());
         rg = dweller.getRg();
         status = dweller.getStatus();
-        residence = dweller.getResidence().getId();
+        residencia = dweller.getResidence().getId();
         contactDweller = dweller.getContactDweller().getId();
         carro = dweller.getCar().getId();
     }
