@@ -27,7 +27,7 @@ public class DwellerDTO {
 
     private Integer contactDweller;
 
-    private Integer car;
+    private Integer carro;
 
     public DwellerDTO(Dweller dweller) {
         id = dweller.getId();
@@ -37,6 +37,6 @@ public class DwellerDTO {
         status = dweller.getStatus();
         residence = dweller.getResidence().getId();
         contactDweller = dweller.getContactDweller().getId();
-        car = dweller.getCar().getId();
+        carro = dweller.getCar().getId();
     }
 }
