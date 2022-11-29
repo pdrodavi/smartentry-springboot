@@ -10,7 +10,7 @@ pipeline {
     stage('Scanner') {
       agent any
       steps {
-        sh 'sh "mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pdrodavi_smartentry-springboot"'
+        withSonarQubeEnv(envOnly: true, installationName: 'SONAR_SCANNER')
       }
     }
 
