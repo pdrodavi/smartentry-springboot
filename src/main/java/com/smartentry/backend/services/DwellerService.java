@@ -56,7 +56,7 @@ public class DwellerService {
 
         ContactDweller contactDweller = contactDwellerService.findById(obj.getContactDweller());
 
-        Car car = carService.findById(obj.getCar());
+        Car car = carService.findById(obj.getCarro());
 
         newObj.setResidence(residence);
         newObj.setContactDweller(contactDweller);
@@ -78,7 +78,7 @@ public class DwellerService {
 
         ContactDweller contactDweller = contactDwellerService.findById(obj.getContactDweller());
 
-        Car car = carService.findById(obj.getCar());
+        Car car = carService.findById(obj.getCarro());
 
         newObj.setResidence(residence);
         newObj.setContactDweller(contactDweller);
